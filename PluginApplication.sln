@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PluginApplication", "PluginApplication\PluginApplication.csproj", "{979177CF-A83C-40E5-86CC-AA0F726B894E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{979177CF-A83C-40E5-86CC-AA0F726B894E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{979177CF-A83C-40E5-86CC-AA0F726B894E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{979177CF-A83C-40E5-86CC-AA0F726B894E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{979177CF-A83C-40E5-86CC-AA0F726B894E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
