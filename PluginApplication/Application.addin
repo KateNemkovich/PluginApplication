@@ -2,8 +2,8 @@
    <AddIn Type="Application">
        <Name>PluginApplication</Name>
         <Assembly>PluginApplication/PluginApplication.dll</Assembly>
-        <FullClassName>PluginApplicaation.Application</FullClassName>
-        <AddInId>2B3DB227-62B1-46E4-8388-1EB45BF74944</AddInId>
+        <FullClassName>PluginApplication.Application</FullClassName>
+        <AddInId>CFF47966-D3F8-4AFE-9C0A-1BDCA6B84926</AddInId>
         <VendorId>Kate</VendorId>
         <VendorDescription>Description</VendorDescription>
     </AddIn>
