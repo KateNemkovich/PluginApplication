@@ -1,5 +1,8 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Drawing;
+using System.Reflection;
 using Autodesk.Revit.UI;
+using System.Windows.Media.Imaging;
 
 namespace PluginApplication;
 
@@ -10,8 +13,10 @@ public class Application:IExternalApplication
         application.CreateRibbonTab("PluginApplication");
         var ribbonPanel = application.CreateRibbonPanel("PluginApplication","Panel");
         var type = typeof (Command);
-        ribbonPanel.AddItem(new PushButtonData("Button", "Something", Assembly.GetAssembly(type).Location,
+        var ribbonItem = (RibbonButton) ribbonPanel.AddItem(new PushButtonData("Button", "Something", Assembly.GetAssembly(type).Location,
             type.FullName));
+        ribbonItem.Image = new BitmapImage(new Uri("pack://application:,,,/PluginApplication;component/Resources/Images/RibbonIcon16.png"));
+        ribbonItem.LargeImage = new BitmapImage(new Uri("pack://application:,,,/PluginApplication;component/Resources/Images/RibbonIcon32.png"));
 
         return Result.Succeeded;
     }
