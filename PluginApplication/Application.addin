@@ -1,6 +1,6 @@
 ﻿<RevitAddIns>
-   <AddIn Type="Application">
-       <Name>PluginApplication</Name>
+    <AddIn Type="Application">
+        <Name>PluginApplication</Name>
         <Assembly>PluginApplication/PluginApplication.dll</Assembly>
         <FullClassName>PluginApplication.Application</FullClassName>
         <AddInId>CFF47966-D3F8-4AFE-9C0A-1BDCA6B84926</AddInId>
