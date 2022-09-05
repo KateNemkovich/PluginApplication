@@ -9,8 +9,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Nice3point.Revit.Api.RevitAPI" Version="2023.0.1"/>
-        <PackageReference Include="Nice3point.Revit.Api.RevitAPIUI" Version="2023.0.1"/>
+        <PackageReference Include="Nice3point.Revit.Api.RevitAPI" Version="2023.0.1" />
+        <PackageReference Include="Nice3point.Revit.Api.RevitAPIUI" Version="2023.0.1" />
+        <PackageReference Include="Nice3point.Revit.Extensions" Version="2023.1.6" />
     </ItemGroup>
 
     <ItemGroup>
@@ -21,8 +22,8 @@
 
     <ItemGroup>
 
-        <Resource Include="Resources\Images\RibbonIcon16.png"/>
-        <Resource Include="Resources\Images\RibbonIcon32.png"/>
+        <Resource Include="Resources\Images\RibbonIcon16.png" />
+        <Resource Include="Resources\Images\RibbonIcon32.png" />
     </ItemGroup>
 
     <PropertyGroup>
@@ -34,8 +35,8 @@
 
     <Target Name="CopyFiles" AfterTargets="CoreBuild">
         <ItemGroup>
-            <RootItem Include="$(ProjectDir)*.addin"/>
-            <AddinItem Include="$(TargetDir)$(AssemblyName).*"/>
+            <RootItem Include="$(ProjectDir)*.addin" />
+            <AddinItem Include="$(TargetDir)*" />
         </ItemGroup>
 
         <PropertyGroup>
@@ -43,14 +44,14 @@
             <AddinDir>$(RootDir)$(AssemblyName)\</AddinDir>
         </PropertyGroup>
 
-        <Copy SourceFiles="@(RootItem)" DestinationFolder="$(RootDir)"/>
-        <Copy SourceFiles="@(AddinItem)" DestinationFolder="$(AddinDir)"/>
+        <Copy SourceFiles="@(RootItem)" DestinationFolder="$(RootDir)" />
+        <Copy SourceFiles="@(AddinItem)" DestinationFolder="$(AddinDir)" />
 
         <ItemGroup>
-            <AddinFiles Include="$(RootDir)**\*.*"/>
+            <AddinFiles Include="$(RootDir)**\*.*" />
         </ItemGroup>
 
-        <Copy SourceFiles="@(AddinFiles)" DestinationFolder="$(AppData)\Autodesk\Revit\Addins\2023\%(RecursiveDir)" Condition="$(Configuration.Contains('Debug'))"/>
+        <Copy SourceFiles="@(AddinFiles)" DestinationFolder="$(AppData)\Autodesk\Revit\Addins\2023\%(RecursiveDir)" Condition="$(Configuration.Contains('Debug'))" />
     </Target>
 
 
