@@ -12,7 +12,7 @@ public class ElementSummaryCommand : IExternalCommand
     public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
     {
         //блок ссылок на основные классы, которые будут использованы много раз
-        var uiDocument = commandData.Application.ActiveUIDocument; 
+        var uiDocument = commandData.Application.ActiveUIDocument;
         var document = uiDocument.Document;
 
         //блок вычислений
@@ -20,8 +20,8 @@ public class ElementSummaryCommand : IExternalCommand
         var element = document.GetElement(reference);
         var typeId = element.GetTypeId();
         var type = (ElementType) document.GetElement(typeId);
-        
-        StringBuilder summaryBuilder = new StringBuilder();
+
+        var summaryBuilder = new StringBuilder();
         summaryBuilder.Append("Element name: ");
         summaryBuilder.AppendLine(element.Name);
         summaryBuilder.Append("Element category: ");
@@ -33,7 +33,7 @@ public class ElementSummaryCommand : IExternalCommand
 
         //блок вывода на экран (можно через "Element name"+ element.Name+..., а можно через Stringbuilder) 
         TaskDialog.Show("Element summary", summaryBuilder.ToString());
-        
+
         return Result.Succeeded;
     }
 }
