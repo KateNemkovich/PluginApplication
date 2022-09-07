@@ -36,6 +36,10 @@ public class Application : IExternalApplication
         squareButton.SetImage("/PluginApplication;component/Resources/Images/RibbonIcon16.png");
         squareButton.SetLargeImage("/PluginApplication;component/Resources/Images/RibbonIcon32.png");
 
+        var modifyDocument = panel.AddPushButton<ModifyDocumentCommand>("Modify");
+        modifyDocument.SetImage("/PluginApplication;component/Resources/Images/RibbonIcon16.png");
+        modifyDocument.SetLargeImage("/PluginApplication;component/Resources/Images/RibbonIcon32.png");
+
         return Result.Succeeded;
     }
 
