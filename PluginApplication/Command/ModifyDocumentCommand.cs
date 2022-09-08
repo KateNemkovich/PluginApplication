@@ -28,10 +28,20 @@ public class ModifyDocumentCommand : IExternalCommand
         //Начало Transaction
         deliteSelecteion.Start("Modify");
 
-        foreach (var reference in references) document.Delete(reference.ElementId);
+        foreach (var reference in references)
+        {
+            using var deleteSub =new SubTransaction(document);
+            
+            deleteSub.Start();
+            document.Delete(reference.ElementId);
+            deleteSub.Commit();
+            
+           
+        }
         //transaction.RollBack() Обычно используется для временных транзакций, отменяет все изменения документа,
         //но чаще ипользуется метод Commit, он подтверждает изменение всех транзакций внутри
         deliteSelecteion.Commit();
+     
 
         using var deliteWindows = new Transaction(document);
         deliteWindows.Start("Modify windows");
