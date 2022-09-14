@@ -39,6 +39,10 @@ public class Application : IExternalApplication
         var modifyDocument = panel.AddPushButton<ModifyDocumentCommand>("Modify");
         modifyDocument.SetImage("/PluginApplication;component/Resources/Images/RibbonIcon16.png");
         modifyDocument.SetLargeImage("/PluginApplication;component/Resources/Images/RibbonIcon32.png");
+        
+        var roofExtension = panel.AddPushButton<SetParameterCommmand>("Roof extension");
+        roofExtension.SetImage("/PluginApplication;component/Resources/Images/RibbonIcon16.png");
+        roofExtension.SetLargeImage("/PluginApplication;component/Resources/Images/RibbonIcon32.png");
 
         return Result.Succeeded;
     }
