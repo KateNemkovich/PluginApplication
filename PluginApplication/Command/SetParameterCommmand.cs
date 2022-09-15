@@ -22,19 +22,19 @@ public class SetParameterCommmand : IExternalCommand
         //var parameter = element.LookupParameter("SecretParameter"); Поиск по имени
         //Расширение от Ромы которое может найти всё
         var parameter = element.GetParameter("SecretParameter");
-        
-       //Пишем AsDouble так как если посмотрим в ревите в лукап, там зайдем в параметры, то если в графе Storage Type записан дабл,
-       //то используем AsDouble, если что-то другое, то другой метод, то же самое в Set (там уже выбираем нужную перегрузку)
+
+        //Пишем AsDouble так как если посмотрим в ревите в лукап, там зайдем в параметры, то если в графе Storage Type записан дабл,
+        //то используем AsDouble, если что-то другое, то другой метод, то же самое в Set (там уже выбираем нужную перегрузку)
         var parameterValue = parameter.AsDouble();
-        
+
         using var roofExtension = new Transaction(document);
         roofExtension.Start("Roof extension");
-        parameter.Set(parameterValue-3d.FromMeters());
+        parameter.Set(parameterValue - 3d.FromMeters());
         roofExtension.Commit();
 
         TaskDialog.Show("Roof extension",
             $"New:{parameter.AsDouble().ToString(CultureInfo.InvariantCulture)}\n Old:{parameterValue.ToString()}");
-        
+
         // var parameterSquare = element.get_Parameter(BuiltInParameter.HOST_AREA_COMPUTED).AsDouble();
         // var convertFromInternalUnits =
         //     UnitUtils.ConvertFromInternalUnits(parameterSquare, UnitTypeId.SquareMillimeters);

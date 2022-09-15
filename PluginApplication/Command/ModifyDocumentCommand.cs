@@ -18,7 +18,7 @@ public class ModifyDocumentCommand : IExternalCommand
         // в целом, когда используется IDisposable, то необходима очистка, но в ревите только для Transaction,SubTransaction и TransactionGroup
         using var deliteGroup = new TransactionGroup(document);
         deliteGroup.Start("Group modify");
-        
+
         using var deliteSelecteion = new Transaction(document);
         /*
          Перед началом выполнения Transaction ей дайют название, чтобы в ревите появились кнопки, без них будет Exception, 
@@ -30,18 +30,17 @@ public class ModifyDocumentCommand : IExternalCommand
 
         foreach (var reference in references)
         {
-            using var deleteSub =new SubTransaction(document);
-            
+            using var deleteSub = new SubTransaction(document);
+
             deleteSub.Start();
             document.Delete(reference.ElementId);
             deleteSub.Commit();
-            
-           
         }
+
         //transaction.RollBack() Обычно используется для временных транзакций, отменяет все изменения документа,
         //но чаще ипользуется метод Commit, он подтверждает изменение всех транзакций внутри
         deliteSelecteion.Commit();
-     
+
 
         using var deliteWindows = new Transaction(document);
         deliteWindows.Start("Modify windows");
