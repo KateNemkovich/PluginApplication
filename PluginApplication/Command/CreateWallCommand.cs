@@ -35,9 +35,21 @@ public class CreateWallCommand : IExternalCommand
             //Ищет по категории
             .OfCategory(BuiltInCategory.OST_Levels)
             .FirstElementId();
+        
+        var floorId = new FilteredElementCollector(document)
+            //Ищет экземпляры
+            .WhereElementIsElementType()
+            //Ищет по категории
+            .OfCategory(BuiltInCategory.OST_Floors)
+            .FirstElementId();
 
         foreach (var curve in curves) Wall.Create(document, curve, levelId, false);
 
+        var curveLoop = CurveLoop.Create(curves);
+            //var curveLoop2 = CurveLoop.CreateViaOffset(curveLoop,13d,XYZ.BasisY);
+        var loop = new List<CurveLoop> {curveLoop};
+            Floor.Create(document,loop,floorId,levelId);
+        
         wallCommand.Commit();
 
         return Result.Succeeded;
