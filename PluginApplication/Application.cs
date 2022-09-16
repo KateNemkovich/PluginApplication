@@ -48,6 +48,10 @@ public class Application : IExternalApplication
         wallCreation.SetImage("/PluginApplication;component/Resources/Images/RibbonIcon16.png");
         wallCreation.SetLargeImage("/PluginApplication;component/Resources/Images/RibbonIcon32.png");
 
+        var family = panel.AddPushButton<PlaceFamilyCommand>("Family");
+        family.SetImage("/PluginApplication;component/Resources/Images/RibbonIcon16.png");
+        family.SetLargeImage("/PluginApplication;component/Resources/Images/RibbonIcon32.png");
+
         return Result.Succeeded;
     }
 
