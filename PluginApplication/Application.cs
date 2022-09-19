@@ -52,6 +52,11 @@ public class Application : IExternalApplication
         family.SetImage("/PluginApplication;component/Resources/Images/RibbonIcon16.png");
         family.SetLargeImage("/PluginApplication;component/Resources/Images/RibbonIcon32.png");
 
+        var move = panel.AddPushButton<ChangeLocationCommand>("Move");
+        move.SetImage("/PluginApplication;component/Resources/Images/RibbonIcon16.png");
+        move.SetLargeImage("/PluginApplication;component/Resources/Images/RibbonIcon32.png");
+
+
         return Result.Succeeded;
     }
 
