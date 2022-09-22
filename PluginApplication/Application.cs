@@ -56,6 +56,10 @@ public class Application : IExternalApplication
         move.SetImage("/PluginApplication;component/Resources/Images/RibbonIcon16.png");
         move.SetLargeImage("/PluginApplication;component/Resources/Images/RibbonIcon32.png");
 
+        var intersections = panel.AddPushButton<ElementIntersectionCommand>("Intersections");
+        intersections.SetImage("/PluginApplication;component/Resources/Images/RibbonIcon16.png");
+        intersections.SetLargeImage("/PluginApplication;component/Resources/Images/RibbonIcon32.png");
+
 
         return Result.Succeeded;
     }

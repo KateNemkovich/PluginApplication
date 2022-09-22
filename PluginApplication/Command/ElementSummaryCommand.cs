@@ -18,6 +18,7 @@ public class ElementSummaryCommand : IExternalCommand
         //блок вычислений
         var reference = uiDocument.Selection.PickObject(ObjectType.Element);
         var element = document.GetElement(reference);
+        //получаем ID элемента
         var typeId = element.GetTypeId();
         var type = (ElementType) document.GetElement(typeId);
 

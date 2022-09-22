@@ -13,6 +13,7 @@ public class CollectWindowsCommand : IExternalCommand
         var uiDocument = commandData.Application.ActiveUIDocument;
         var document = uiDocument.Document;
 
+        //Коллектор, необходимо применять фильтры чтобы избежать исключения
         var windows = new FilteredElementCollector(document)
             .WhereElementIsNotElementType()
             .OfCategory(BuiltInCategory.OST_Windows)
