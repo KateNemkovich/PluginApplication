@@ -26,11 +26,10 @@ public class IntersectGeometryCommand : IExternalCommand
             }
         );
         // Объявляем переменную для дальнейшего заполнения в цикле
-        Solid solid;
+        Solid solid = null;
         foreach (var geom in geometryElement)
         {
-            var geoSolid = geom as Solid;
-            if (geoSolid != null)
+            if (geom is Solid geoSolid)
             {
                 solid = geoSolid;
             }
@@ -39,7 +38,7 @@ public class IntersectGeometryCommand : IExternalCommand
         var elementIds = new FilteredElementCollector(document)
             .WhereElementIsNotElementType()
             //Все элементы сравниваются с element и если они пересекаются, то  добавляются в итоговый список
-            .WherePasses(new ElementIntersectsSolidFilter())
+            .WherePasses(new ElementIntersectsSolidFilter(solid))
             .ToElementIds();
 
         return Result.Succeeded;

@@ -60,6 +60,10 @@ public class Application : IExternalApplication
         intersections.SetImage("/PluginApplication;component/Resources/Images/RibbonIcon16.png");
         intersections.SetLargeImage("/PluginApplication;component/Resources/Images/RibbonIcon32.png");
 
+        var rayIntersections = panel.AddPushButton<RayIntersectorCommand>("RayIntersections");
+        rayIntersections.SetImage("/PluginApplication;component/Resources/Images/RibbonIcon16.png");
+        rayIntersections.SetLargeImage("/PluginApplication;component/Resources/Images/RibbonIcon32.png");
+
 
         return Result.Succeeded;
     }
