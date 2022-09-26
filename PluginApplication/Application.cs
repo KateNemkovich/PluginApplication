@@ -64,6 +64,10 @@ public class Application : IExternalApplication
         rayIntersections.SetImage("/PluginApplication;component/Resources/Images/RibbonIcon16.png");
         rayIntersections.SetLargeImage("/PluginApplication;component/Resources/Images/RibbonIcon32.png");
 
+        var apiPlan = panel.AddPushButton<ViewsCommand>("API Plan");
+        apiPlan.SetImage("/PluginApplication;component/Resources/Images/RibbonIcon16.png");
+        apiPlan.SetLargeImage("/PluginApplication;component/Resources/Images/RibbonIcon32.png");
+
 
         return Result.Succeeded;
     }
