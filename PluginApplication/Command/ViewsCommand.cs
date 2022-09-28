@@ -16,15 +16,17 @@ public class ViewsCommand : IExternalCommand
         var uiDocument = commandData.Application.ActiveUIDocument;
         var document = uiDocument.Document;
 
-        using var wallCommand = new Transaction(document);
-        wallCommand.Start("API Plan");
+        using var viewCommand = new Transaction(document);
+        viewCommand.Start("API Plan");
 
         var familyId = new FilteredElementCollector(document)
             .WhereElementIsElementType()
             .OfClass(typeof(ViewFamilyType))
             .Cast<ViewFamilyType>()
             .First(x => x.ViewFamily == ViewFamily.FloorPlan)
+            //получает именно айди элемента, а не типа как .GetTypeId
             .Id;
+
 
         var levelId = new FilteredElementCollector(document)
             //Ищет экземпляры
@@ -33,10 +35,32 @@ public class ViewsCommand : IExternalCommand
             .OfCategory(BuiltInCategory.OST_Levels)
             .FirstElementId();
 
+        var titleBlock = new FilteredElementCollector(document)
+            //Ищет экземпляры
+            .WhereElementIsElementType()
+            //Ищет по категории
+            .OfCategory(BuiltInCategory.OST_TitleBlocks)
+            .FirstElementId();
+
         var viewPlan = ViewPlan.Create(document, familyId, levelId);
         viewPlan.Name = "First api plan in my life";
+        var viewId = viewPlan.Id;
 
-        wallCommand.Commit();
+        var viewSheet = ViewSheet.Create(document, titleBlock);
+        viewSheet.Name = "First api sheet in my life";
+        viewSheet.SheetNumber = "A106";
+        var viewSheetId = viewSheet.Id;
+
+        var x1 = viewSheet.Outline.Max.U;
+        var x2 = viewSheet.Outline.Min.U;
+        var y1 = viewSheet.Outline.Max.V;
+        var y2 = viewSheet.Outline.Min.V;
+        var pointX = (x1 + x2) / 2;
+        var pointY = (y1 + y2) / 2;
+
+        var viewPort = Viewport.Create(document, viewSheetId, viewId, new XYZ(pointX, pointY, 0.0));
+
+        viewCommand.Commit();
 
         return Result.Succeeded;
     }
