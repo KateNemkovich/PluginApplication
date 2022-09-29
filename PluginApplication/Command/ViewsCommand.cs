@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
@@ -59,8 +60,28 @@ public class ViewsCommand : IExternalCommand
         var pointY = (y1 + y2) / 2;
 
         var viewPort = Viewport.Create(document, viewSheetId, viewId, new XYZ(pointX, pointY, 0.0));
+        //Изменение масштаба плана, чтобы поместился на листе
+        viewPlan.Scale = 200;
+
+        //Добавление фильтров
+        var filterID = new List<ElementId>
+        {
+            Category.GetCategory(document, BuiltInCategory.OST_Walls).Id
+        };
+        var elementParameterFilter = new ElementParameterFilter(ParameterFilterRuleFactory
+            .CreateContainsRule(new ElementId(BuiltInParameter.ALL_MODEL_INSTANCE_COMMENTS), "API comment"));
+        //new LogicalOrFilter();
+        // new LogicalAndFilter();
+        var filter = ParameterFilterElement.Create(document, "comment", filterID, elementParameterFilter);
+
+        viewPlan.AddFilter(filter.Id);
+        viewPlan.SetFilterVisibility(filter.Id, false);
+        viewPlan.SetIsFilterEnabled(filter.Id, true);
 
         viewCommand.Commit();
+
+        //Открывает созданный вид, реализуется только после коммита
+        uiDocument.ActiveView = viewSheet;
 
         return Result.Succeeded;
     }
