@@ -68,6 +68,10 @@ public class Application : IExternalApplication
         apiPlan.SetImage("/PluginApplication;component/Resources/Images/RibbonIcon16.png");
         apiPlan.SetLargeImage("/PluginApplication;component/Resources/Images/RibbonIcon32.png");
 
+        var test = panel.AddPushButton<Test>("Test");
+        test.SetImage("/PluginApplication;component/Resources/Images/RibbonIcon16.png");
+        test.SetLargeImage("/PluginApplication;component/Resources/Images/RibbonIcon32.png");
+
 
         return Result.Succeeded;
     }
