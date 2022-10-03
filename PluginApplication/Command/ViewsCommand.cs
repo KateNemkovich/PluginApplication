@@ -78,6 +78,18 @@ public class ViewsCommand : IExternalCommand
         viewPlan.SetFilterVisibility(filter.Id, false);
         viewPlan.SetIsFilterEnabled(filter.Id, true);
 
+        var windows = new FilteredElementCollector(document, viewId)
+            .WhereElementIsNotElementType()
+            .OfCategory(BuiltInCategory.OST_Windows)
+            .ToElements();
+
+        foreach (var window in windows)
+        {
+            // Ставит марку, вторая перегрузка изпользуется тогда, когда необходимо поставить конкретную марку
+            IndependentTag.Create(document, viewId, new Reference(window), true, TagMode.TM_ADDBY_CATEGORY
+                , TagOrientation.Horizontal, ((LocationPoint) window.Location).Point);
+        }
+
         viewCommand.Commit();
 
         //Открывает созданный вид, реализуется только после коммита
