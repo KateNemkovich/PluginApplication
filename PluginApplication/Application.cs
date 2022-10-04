@@ -1,4 +1,6 @@
-﻿using Autodesk.Revit.UI;
+﻿using System.Diagnostics;
+using Autodesk.Revit.DB.Events;
+using Autodesk.Revit.UI;
 using Nice3point.Revit.Extensions;
 using PluginApplication.Command;
 
@@ -72,6 +74,15 @@ public class Application : IExternalApplication
         test.SetImage("/PluginApplication;component/Resources/Images/RibbonIcon16.png");
         test.SetLargeImage("/PluginApplication;component/Resources/Images/RibbonIcon32.png");
 
+        application.ControlledApplication.DocumentChanged += (sender, args) =>
+        {
+            foreach (var id in args.GetDeletedElementIds())
+            {
+                Debug.WriteLine("Deleted:" + id);
+            }
+        };
+
+        application.ControlledApplication.DocumentChanged += ControlledApplicationOnDocumentChanged;
 
         return Result.Succeeded;
     }
@@ -79,5 +90,13 @@ public class Application : IExternalApplication
     public Result OnShutdown(UIControlledApplication application)
     {
         return Result.Succeeded;
+    }
+
+    private void ControlledApplicationOnDocumentChanged(object sender, DocumentChangedEventArgs e)
+    {
+        foreach (var id in e.GetModifiedElementIds())
+        {
+            Debug.WriteLine("Modified:" + id);
+        }
     }
 }
