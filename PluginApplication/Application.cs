@@ -74,6 +74,11 @@ public class Application : IExternalApplication
         test.SetImage("/PluginApplication;component/Resources/Images/RibbonIcon16.png");
         test.SetLargeImage("/PluginApplication;component/Resources/Images/RibbonIcon32.png");
 
+        var storageCommand = panel.AddPushButton<ExtensibleStorageCommand>("Test1");
+        storageCommand.SetImage("/PluginApplication;component/Resources/Images/RibbonIcon16.png");
+        storageCommand.SetLargeImage("/PluginApplication;component/Resources/Images/RibbonIcon32.png");
+
+
         application.ControlledApplication.DocumentChanged += (sender, args) =>
         {
             foreach (var id in args.GetDeletedElementIds())
